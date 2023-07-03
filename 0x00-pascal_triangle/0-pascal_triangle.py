@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+"""Computes Pascal Triangle"""
+
 
 def pascal_triangle(n):
     """Computes Pascal Triangle"""
