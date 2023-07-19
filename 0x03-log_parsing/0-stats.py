@@ -32,8 +32,8 @@ DEFAULT_COUNT = 10
 log_interval = DEFAULT_COUNT
 
 
-try:
-    for line in stdin:
+for line in stdin:
+    try:
         if re.match(r'^(\d+\.)+\d+ - \[.+] \".+\" \d{3} \d+$', line):
             log.add(*(line.split()[-2:]))
             if log_interval == 1:
@@ -41,6 +41,6 @@ try:
                 log.print()
             else:
                 log_interval -= 1
-except KeyboardInterrupt:
-    log_interval = DEFAULT_COUNT
-    log.print()
+    except KeyboardInterrupt:
+        log_interval = DEFAULT_COUNT
+        log.print()
