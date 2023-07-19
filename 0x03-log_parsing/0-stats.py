@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""0. Log parsing"""
 from sys import stdin, stdout
 import re
 
