@@ -32,11 +32,16 @@ class TrackLog:
 log = TrackLog()
 DEFAULT_COUNT = 10
 log_interval = DEFAULT_COUNT
+log_pattern = (
+    r'^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})'
+    r' - \[(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{6})\]'
+    r' "(GET|POST|PUT|DELETE) (.+)" (\d{3}) (\d+)$'
+)
 
 
 try:
     for line in stdin:
-        if re.match(r'^(\d+\.)+\d+ - \[.+] \".+\" \d{3} \d+$', line):
+        if re.match(log_pattern, line):
             log.add(*(line.split()[-2:]))
             if log_interval == 1:
                 log_interval = DEFAULT_COUNT
