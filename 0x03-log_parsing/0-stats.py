@@ -22,9 +22,11 @@ class TrackLog:
 
     def print(self) -> None:
         """Prints Log metrics"""
-        stdout.write('File size: {}\n'.format(self._size))
+        # stdout.write('File size: {}\n'.format(self._size))
+        print('File size: {}'.format(self._size))
         for status, counts in self._status.items():
-            stdout.write('{}: {}\n'.format(status, counts))
+            # stdout.write('{}: {}\n'.format(status, counts))
+            print('{}: {}'.format(status, counts))
 
 
 log = TrackLog()
