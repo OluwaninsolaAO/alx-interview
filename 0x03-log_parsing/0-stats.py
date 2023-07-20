@@ -54,4 +54,4 @@ try:
                 log_interval -= 1
 except KeyboardInterrupt:
     log.print()
-    exit(0)
+    raise
