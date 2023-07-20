@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """0. Log parsing"""
-from sys import stdin, stdout
-import re
+from sys import stdin
 
 
 class TrackLog:
@@ -14,6 +13,14 @@ class TrackLog:
 
     def add(self, status: str, size: str) -> None:
         """Updates log metrics"""
+        try:
+            status = int(status)
+            size = int(size)
+        except:
+            return
+        arr = [200, 301, 400, 401, 403, 404, 405, 500]
+        if status not in arr:
+            return
         if not self._status.get(status, None):
             self._status.update({status: 1})
         else:
@@ -22,36 +29,27 @@ class TrackLog:
 
     def print(self) -> None:
         """Prints Log metrics"""
-        # stdout.write('File size: {}\n'.format(self._size))
         print('File size: {}'.format(self._size))
 
         arr = list(self._status.items())
         arr.sort()
 
         for status, counts in arr:
-            # stdout.write('{}: {}\n'.format(status, counts))
             print('{}: {}'.format(status, counts))
 
 
 log = TrackLog()
 DEFAULT_COUNT = 10
 log_interval = DEFAULT_COUNT
-log_pattern = (
-    r'^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})'
-    r' - \[(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{6})\]'
-    r' "(GET|POST|PUT|DELETE) (.+)" (\d{3}) (\d+)$'
-)
-
 
 try:
     for line in stdin:
-        if re.match(log_pattern, line):
-            log.add(*(line.split()[-2:]))
-            if log_interval == 1:
-                log_interval = DEFAULT_COUNT
-                log.print()
-            else:
-                log_interval -= 1
+        log.add(*(line.split()[-2:]))
+        if log_interval == 1:
+            log_interval = DEFAULT_COUNT
+            log.print()
+        else:
+            log_interval -= 1
 except KeyboardInterrupt:
     log.print()
     raise
