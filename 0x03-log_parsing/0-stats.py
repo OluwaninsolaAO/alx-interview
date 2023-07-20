@@ -2,54 +2,47 @@
 """0. Log parsing"""
 import sys
 
-
-class TrackLog:
-    """Keep tracks of log size and status codes"""
-
-    def __init__(self) -> None:
-        """Initializes TrackLog"""
-        self._size = 0
-        self._status = {}
-
-    def add(self, status: str, size: str) -> None:
-        """Updates log metrics"""
-        try:
-            status = int(status)
-            size = int(size)
-        except:
-            return
-        arr = [200, 301, 400, 401, 403, 404, 405, 500]
-        if status not in arr:
-            return
-        if not self._status.get(status, None):
-            self._status.update({status: 1})
-        else:
-            self._status.update({status: self._status.get(status) + 1})
-        self._size += int(size)
-
-    def print(self) -> None:
-        """Prints Log metrics"""
-        print('File size: {}'.format(self._size))
-
-        arr = list(self._status.items())
-        arr.sort()
-
-        for status, counts in arr:
-            print('{}: {}'.format(status, counts))
+status_codes = {}
+total_size = 0
 
 
-log = TrackLog()
+def add(status: str, size: str) -> int:
+    """Updates log metrics"""
+    try:
+        status = int(status)
+        size = int(size)
+    except:
+        return 0
+    arr = [200, 301, 400, 401, 403, 404, 405, 500]
+    if status not in arr:
+        return
+    if not status_codes.get(status, None):
+        status_codes.update({status: 1})
+    else:
+        status_codes.update({status: status_codes.get(status) + 1})
+    return size
+
+
+def print_log() -> None:
+    """Prints Log metrics"""
+    print('File size: {}'.format(total_size))
+    arr = list(status_codes.items())
+    arr.sort()
+    for status, counts in arr:
+        print('{}: {}'.format(status, counts))
+
+
 DEFAULT_COUNT = 10
 log_interval = DEFAULT_COUNT
 
 try:
     for line in sys.stdin:
-        log.add(*(line.split()[-2:]))
+        total_size += add(*(line.split()[-2:]))
         if log_interval == 1:
             log_interval = DEFAULT_COUNT
-            log.print()
+            print_log()
         else:
             log_interval -= 1
 except KeyboardInterrupt:
-    log.print()
+    print_log()
     raise
