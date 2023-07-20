@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """0. Log parsing"""
-from sys import stdin
+import sys
 
 
 class TrackLog:
@@ -43,7 +43,7 @@ DEFAULT_COUNT = 10
 log_interval = DEFAULT_COUNT
 
 try:
-    for line in stdin:
+    for line in sys.stdin:
         log.add(*(line.split()[-2:]))
         if log_interval == 1:
             log_interval = DEFAULT_COUNT
