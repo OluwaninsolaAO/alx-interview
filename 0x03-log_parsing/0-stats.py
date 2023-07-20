@@ -24,7 +24,11 @@ class TrackLog:
         """Prints Log metrics"""
         # stdout.write('File size: {}\n'.format(self._size))
         print('File size: {}'.format(self._size))
-        for status, counts in self._status.items():
+
+        arr = list(self._status.items())
+        arr.sort()
+
+        for status, counts in arr:
             # stdout.write('{}: {}\n'.format(status, counts))
             print('{}: {}'.format(status, counts))
 
