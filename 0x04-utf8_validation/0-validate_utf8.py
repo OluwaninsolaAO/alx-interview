@@ -5,9 +5,6 @@
 def validUTF8(data):
     """Determines if a given data set represents a
     valid UTF-8 encoding"""
-    for byte in data:
-        if not isinstance(byte, int):
-            return False
 
     def check_next_bytes(num_bytes):
         nonlocal i
