@@ -37,8 +37,7 @@ def resolve_matrix_for(queen, matrix, positions):
             """Removes Cell from matrix"""
             matrix.pop(matrix.index(cell))
 
-        matrix_copy = matrix[:]
-        for cell in matrix_copy:
+        for cell in matrix[:]:
             if cell == queen:
                 pop_cell(cell)
             elif cell[0] == queen[0]:
