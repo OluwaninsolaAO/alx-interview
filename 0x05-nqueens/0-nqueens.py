@@ -16,15 +16,6 @@ except ValueError:
     sys.exit(1)
 
 
-def generate_matrix(N):
-    """Generates Matrix of NxN"""
-    matrix = []
-    for x in range(N):
-        for y in range(N):
-            matrix.append([x, y])
-    return matrix
-
-
 def resolve_matrix_for(queen, matrix, positions):
     """
     Resolves attack position for queen in matrix then recursively
@@ -44,10 +35,12 @@ def resolve_matrix_for(queen, matrix, positions):
             print(positions)
         return
 
+    # else recursively check possible queen positions
     for possible_queen in [cell for cell in matrix
                            if cell[0] == matrix[0][0]]:
         resolve_matrix_for(possible_queen, matrix[:], positions[:])
 
 
 for i in range(N):
-    resolve_matrix_for([0, i], generate_matrix(N), [])
+    resolve_matrix_for([0, i], [[x, y] for x in range(N)
+                       for y in range(N)], [])
