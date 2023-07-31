@@ -25,11 +25,12 @@ def generate_matrix(N):
     return matrix
 
 
-def resolve_matrix_for(queen, matrix):
+def resolve_matrix_for(queen, matrix, positions):
     """
     Resolves attack position for queen in matrix then returns
     the position of the next queen not in range of attack.
     """
+    positions.append(queen)
 
     def check_visible_cells(queen, matrix):
         def pop_cell(cell):
@@ -53,31 +54,21 @@ def resolve_matrix_for(queen, matrix):
 
     # checks the best position for the next queen
     if len(matrix) == 0:
-        return None
+        position_v.append(positions)
+        return
+
     root_cell = matrix[0]
     root_level_cells = [cell for cell in matrix if
                         cell[0] == root_cell[0]]
-    root_collection = {}
     for level_cell in root_level_cells:
-        matrix_copy = matrix[:]
-        check_visible_cells(level_cell, matrix_copy)
-        root_collection.update({tuple(level_cell): len(matrix_copy)})
+        resolve_matrix_for(level_cell, matrix[:], positions[:])
 
-    sorted_by_len = list(sorted(root_collection.items(),
-                                key=lambda item: item[1]))
-    print('=>', list(sorted_by_len[-1][0]))
-    return list(sorted_by_len[-1][0])
 
+position_v = []
 
 for i in range(N):
-    n_queens = []
-    matrix = generate_matrix(N)
-    queen = [0, i]
-    print('\n=>', queen)
-    while queen is not None:
-        n_queens.append(queen)
-        queen = resolve_matrix_for(queen, matrix)
+    resolve_matrix_for([0, i], generate_matrix(N), [])
 
-    if len(n_queens) == N:
-        print(n_queens)
-    # print(n_queens)
+for i in position_v:
+    if len(i) == N:
+        print(i)
