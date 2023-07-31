@@ -58,11 +58,9 @@ def resolve_matrix_for(queen, matrix, positions):
             print(positions)
         return
 
-    root_cell = matrix[0]
-    root_level_cells = [cell for cell in matrix if
-                        cell[0] == root_cell[0]]
-    for level_cell in root_level_cells:
-        resolve_matrix_for(level_cell, matrix[:], positions[:])
+    for possible_queen in [cell for cell in matrix if
+                           cell[0] == matrix[0][0]]:
+        resolve_matrix_for(possible_queen, matrix[:], positions[:])
 
 
 for i in range(N):
