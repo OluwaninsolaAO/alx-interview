@@ -32,21 +32,11 @@ def resolve_matrix_for(queen, matrix, positions):
     """
     positions.append(queen)
 
-    def pop_cell(cell):
-        """Removes Cell from matrix"""
-        matrix.pop(matrix.index(cell))
-
     for cell in matrix[:]:
-        if cell == queen:
-            pop_cell(cell)
-        elif cell[0] == queen[0]:
-            pop_cell(cell)
-        elif cell[1] == queen[1]:
-            pop_cell(cell)
-        elif cell[0] - cell[1] == queen[0] - queen[1]:
-            pop_cell(cell)
-        elif cell[0] + cell[1] == queen[0] + queen[1]:
-            pop_cell(cell)
+        if cell == queen or cell[0] == queen[0] or cell[1] == queen[1]\
+                or cell[0] - cell[1] == queen[0] - queen[1] or\
+                cell[0] + cell[1] == queen[0] + queen[1]:
+            matrix.pop(matrix.index(cell))
 
     # if end of the recursion
     if len(matrix) == 0:
