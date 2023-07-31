@@ -54,7 +54,8 @@ def resolve_matrix_for(queen, matrix, positions):
 
     # if end of the line
     if len(matrix) == 0:
-        position_v.append(positions)
+        if len(positions) == N:
+            print(positions)
         return
 
     root_cell = matrix[0]
@@ -64,11 +65,5 @@ def resolve_matrix_for(queen, matrix, positions):
         resolve_matrix_for(level_cell, matrix[:], positions[:])
 
 
-position_v = []
-
 for i in range(N):
     resolve_matrix_for([0, i], generate_matrix(N), [])
-
-for i in position_v:
-    if len(i) == N:
-        print(i)
