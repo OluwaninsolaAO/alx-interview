@@ -52,7 +52,7 @@ def resolve_matrix_for(queen, matrix, positions):
 
     check_visible_cells(queen, matrix)
 
-    # checks the best position for the next queen
+    # if end of the line
     if len(matrix) == 0:
         position_v.append(positions)
         return
