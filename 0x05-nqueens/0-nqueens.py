@@ -32,33 +32,30 @@ def resolve_matrix_for(queen, matrix, positions):
     """
     positions.append(queen)
 
-    def check_visible_cells(queen, matrix):
-        def pop_cell(cell):
-            """Removes Cell from matrix"""
-            matrix.pop(matrix.index(cell))
+    def pop_cell(cell):
+        """Removes Cell from matrix"""
+        matrix.pop(matrix.index(cell))
 
-        for cell in matrix[:]:
-            if cell == queen:
-                pop_cell(cell)
-            elif cell[0] == queen[0]:
-                pop_cell(cell)
-            elif cell[1] == queen[1]:
-                pop_cell(cell)
-            elif cell[0] - cell[1] == queen[0] - queen[1]:
-                pop_cell(cell)
-            elif cell[0] + cell[1] == queen[0] + queen[1]:
-                pop_cell(cell)
+    for cell in matrix[:]:
+        if cell == queen:
+            pop_cell(cell)
+        elif cell[0] == queen[0]:
+            pop_cell(cell)
+        elif cell[1] == queen[1]:
+            pop_cell(cell)
+        elif cell[0] - cell[1] == queen[0] - queen[1]:
+            pop_cell(cell)
+        elif cell[0] + cell[1] == queen[0] + queen[1]:
+            pop_cell(cell)
 
-    check_visible_cells(queen, matrix)
-
-    # if end of the line
+    # if end of the recursion
     if len(matrix) == 0:
         if len(positions) == N:
             print(positions)
         return
 
-    for possible_queen in [cell for cell in matrix if
-                           cell[0] == matrix[0][0]]:
+    for possible_queen in [cell for cell in matrix
+                           if cell[0] == matrix[0][0]]:
         resolve_matrix_for(possible_queen, matrix[:], positions[:])
 
 
