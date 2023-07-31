@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Solves the N queens problem"""
+"""Solves the N queens puzzle challenge"""
 import sys
 
 if len(sys.argv) != 2:
@@ -18,8 +18,9 @@ except ValueError:
 
 def resolve_matrix_for(queen, matrix, positions):
     """
-    Resolves attack position for queen in matrix then recursively
-    resolves for subsequent possible level positions.
+    Resolves/removes reachable range of queen from the matrix then 
+    recursively resolves for subsequent possible queen positions
+    for the next row.
     """
     positions.append(queen)
 
@@ -35,7 +36,7 @@ def resolve_matrix_for(queen, matrix, positions):
             print(positions)
         return
 
-    # else recursively check possible queen positions
+    # else recursively check for possible queen positions
     for possible_queen in [cell for cell in matrix
                            if cell[0] == matrix[0][0]]:
         resolve_matrix_for(possible_queen, matrix[:], positions[:])
