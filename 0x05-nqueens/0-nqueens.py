@@ -27,8 +27,8 @@ def generate_matrix(N):
 
 def resolve_matrix_for(queen, matrix, positions):
     """
-    Resolves attack position for queen in matrix then returns
-    the position of the next queen not in range of attack.
+    Resolves attack position for queen in matrix then recursively
+    resolves for subsequent possible level positions.
     """
     positions.append(queen)
 
