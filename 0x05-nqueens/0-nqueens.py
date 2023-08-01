@@ -18,7 +18,7 @@ except ValueError:
 
 def resolve_matrix_for(queen, matrix, positions):
     """
-    Resolves/removes reachable range of queen from the matrix then 
+    Resolves/removes reachable range of queen from the matrix then
     recursively resolves for subsequent possible queen positions
     for the next row.
     """
