@@ -37,9 +37,9 @@ def resolve_matrix_for(queen, matrix, positions):
         return
 
     # else recursively check for possible queen positions
-    for possible_queen in [cell for cell in matrix
-                           if cell[0] == matrix[0][0]]:
-        resolve_matrix_for(possible_queen, matrix[:], positions[:])
+    for possible_queen_pos in [cell for cell in matrix
+                               if cell[0] == matrix[0][0]]:
+        resolve_matrix_for(possible_queen_pos, matrix[:], positions[:])
 
 
 for i in range(N):
