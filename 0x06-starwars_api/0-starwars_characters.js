@@ -16,7 +16,7 @@ const request = require('request');
 const filmUri = `https://swapi-api.alx-tools.com/api/films/${movieId}/`;
 
 const printCharacterName = (characterUri) => {
-  return new Promise((reject, resolve) => {
+  return new Promise((resolve, reject) => {
     request.get(characterUri, (error, response, body) => {
       if (error) {
         console.log('Error: ', error);
@@ -42,9 +42,10 @@ const main = async () => {
   });
 
   for (const characterUri of charactersUri) {
-    await printCharacterName(characterUri).catch((error) => {
+    const name = await printCharacterName(characterUri).catch((error) => {
       console.log(error);
     });
+    console.log(name);
   }
 };
 main();
