@@ -51,7 +51,7 @@ const main = async () => {
   }
 
   for (const name of names) {
-    console.log(name);
+    console.log(`${name}:`);
   }
 };
 main();
