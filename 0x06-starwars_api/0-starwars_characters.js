@@ -29,6 +29,8 @@ const printCharacterName = (characterUri) => {
   });
 };
 
+const names = [];
+
 const main = async () => {
   const charactersUri = await new Promise((resolve, reject) => {
     request.get(filmUri, (error, response, body) => {
@@ -45,6 +47,10 @@ const main = async () => {
     const name = await printCharacterName(characterUri).catch((error) => {
       console.log(error);
     });
+    names.push(name);
+  }
+
+  for (const name of names) {
     console.log(name);
   }
 };
