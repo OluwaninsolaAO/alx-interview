@@ -7,11 +7,9 @@ def rotate_2d_matrix(matrix):
     n = len(matrix)
     copy = matrix[:]
     for y in range(n):
-        x = n - 1
         dx = []
-        while x >= 0:
+        for x in range(n-1, -1, -1):
             dx.append(matrix[x][y])
-            x -= 1
         matrix.append(dx)
     for dx in copy:
         matrix.pop(matrix.index(dx))
