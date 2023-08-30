@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 """0. Island Perimeter Module"""
-from typing import List
 
 
-def island_perimeter(grid: List[List]) -> int:
+def island_perimeter(grid):
     """returns the perimeter of the island described in grid"""
     count = 0
     for y in range(len(grid)):
