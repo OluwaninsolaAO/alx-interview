@@ -2,7 +2,7 @@
 """0. The Prime Game"""
 
 
-def isWinner(x: int, nums: list[int]) -> str:
+def isWinner(x: int, nums: list) -> str:
     """determine who the winner of each game is between Ben and Maria"""
     ben = 0
     maria = 0
