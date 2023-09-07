@@ -16,10 +16,11 @@ def isWinner(x: int, nums: list) -> str:
             for num in arr[:]:
                 if num % prime == 0:
                     arr.pop(arr.index(num))
-            if index % 2 == 1:
-                maria += 1
-            else:
-                ben += 1
+            index += 1
+        if index % 2 == 1:
+            maria += 1
+        else:
+            ben += 1
 
     # return results
     if ben > maria:
