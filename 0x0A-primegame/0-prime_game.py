@@ -34,5 +34,5 @@ def isWinner(x: int, nums: list) -> str:
     elif maria > ben:
         return 'Maria'
     elif ben == 0 and maria == 0:
-        return 'Ben'
+        return None
     return None
